@@ -1,0 +1,7 @@
+remote: error: Trace: 3dd326a0ab6e9e0a6d0f7b61cd02f70e2d098835399f104a9cd3a367e6ff9fa3        
+remote: error: See https://gh.io/lfs for more information.        
+remote: error: File assets/videos/shortfilm.mp4 is 155.96 MB; this exceeds GitHub's file size limit of 100.00 MB        
+remote: error: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.        
+To https://github.com/jilinyw/personal-portfolio.git
+ ! [remote rejected] main -> main (pre-receive hook declined)
+error: failed to push some refs to 'https://github.com/jilinyw/personal-portfolio.git'

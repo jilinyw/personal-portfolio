@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Angeline Ladroma — Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <style>
+        :root {
+            --bg: #ffffff;
+            --bg2: #f7f7f5;
+            --bg3: #efefec;
+            --accent: #e8a200;
+            --accent-light: #f1cf54;
+            --accent2: #e54c44;
+            --text: #1a1a1a;
+            --muted: #666;
+            --border: rgba(0,0,0,0.09);
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.7; }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--bg2); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+        /* HEADER */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            padding: 20px 80px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 200;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            transition: padding 0.3s;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6em;
+            color: var(--accent);
+            letter-spacing: -0.5px;
+        }
+        nav a {
+            font-size: 0.82em;
+            color: var(--muted);
+            text-decoration: none;
+            margin-left: 36px;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+            position: relative;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 0; height: 1.5px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+        nav a:hover, nav a.active { color: var(--accent); }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+
+        /* HERO */
+        .home {
+            min-height: 100vh;
+            background-image: url('assets/images/background.png');
+            background-size: cover;
+            background-position: center;
+            display: flex; align-items: center;
+            padding: 0 80px;
+            position: relative;
+        }
+        .home::before {
+            content: '';
+            position: absolute; inset: 0;
+        }
+        .home-content { position: relative; z-index: 1; max-width: 680px; }
+        .home-eyebrow {
+            font-size: 0.78em;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+            display: flex; align-items: center; gap: 12px;
+            font-weight: 500;
+        }
+        .home-eyebrow::before {
+            content: '';
+            display: inline-block;
+            width: 32px; height: 1.5px;
+            background: var(--accent);
+        }
+        .home h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8em, 5vw, 4.2em);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            color: #111;
+        }
+        .home h1 em {
+            font-style: italic;
+            color: var(--accent);
+        }
+        .home p {
+            font-size: 1.05em;
+            color: var(--muted);
+            max-width: 480px;
+            margin-bottom: 40px;
+            line-height: 1.85;
+        }
+        .btn-group { display: flex; gap: 14px; flex-wrap: wrap; }
+        .btn-primary {
+            display: inline-block;
+            padding: 13px 32px;
+            background: var(--accent);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 0.88em;
+            letter-spacing: 0.03em;
+            transition: all 0.25s;
+            border: 2px solid var(--accent);
+        }
+        .btn-primary:hover { background: transparent; color: var(--accent); transform: translateY(-2px); }
+        .btn-ghost {
+            display: inline-block;
+            padding: 13px 32px;
+            border: 2px solid var(--border);
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            font-size: 0.88em;
+            letter-spacing: 0.03em;
+            transition: all 0.25s;
+        }
+        .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+        /* SECTIONS */
+        section { padding: 100px 80px; }
+        .section-label {
+            font-size: 0.73em;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 10px;
+            display: flex; align-items: center; gap: 10px;
+            font-weight: 600;
+        }
+        .section-label::before {
+            content: '';
+            display: inline-block;
+            width: 22px; height: 1.5px;
+            background: var(--accent);
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8em, 3vw, 2.5em);
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 48px;
+            line-height: 1.2;
+        }
+
+        /* ABOUT */
+        .about { background: var(--bg2); }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 360px 1fr;
+            gap: 80px;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .about-img-wrap { position: relative; }
+        .about-img-wrap img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 14px;
+            display: block;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        }
+        .about-img-wrap::after {
+            content: '';
+            position: absolute;
+            top: 16px; left: 16px;
+            right: -16px; bottom: -16px;
+            border: 2px solid var(--accent-light);
+            border-radius: 14px;
+            z-index: -1;
+        }
+        .about-text .section-title { margin-bottom: 20px; }
+        .about-text p { color: var(--muted); line-height: 1.95; font-size: 0.97em; text-align: justify; }
+        .about-stats {
+            display: flex; gap: 40px;
+            margin-top: 36px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+        }
+        .stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            color: var(--accent);
+            font-weight: 700;
+            line-height: 1;
+        }
+        .stat-label {
+            font-size: 0.75em;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-top: 5px;
+        }
+
+        /* PROJECTS */
+        .projects { background: var(--bg); }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.4rem;
+        }
+        .proj-box {
+            height: 280px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .proj-box:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(0,0,0,0.15); }
+        .proj-box::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.15) 55%, transparent 100%);
+            z-index: 1;
+            transition: opacity 0.3s;
+        }
+        .proj-inner {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 22px;
+            z-index: 2;
+            transform: translateY(6px);
+            transition: transform 0.3s;
+        }
+        .proj-box:hover .proj-inner { transform: translateY(0); }
+        .proj-tag {
+            font-size: 0.68em;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--accent-light);
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        .proj-inner h3 {
+            color: #fff;
+            font-size: 0.98em;
+            font-weight: 600;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        .proj-btn {
+            display: inline-block;
+            padding: 6px 18px;
+            background: var(--accent);
+            color: #fff;
+            border: 2px solid var(--accent);
+            border-radius: 4px;
+            font-size: 0.78em;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .proj-btn:hover { background: transparent; color: var(--accent-light); border-color: var(--accent-light); }
+
+        .box-one   { background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/project1.png') center/cover no-repeat; }
+        .box-two   { background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/project2.png') center/cover no-repeat; }
+        .box-three { background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/sundayag.jpg') center/cover no-repeat; }
+        .box-four  { background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/exhibit.jpg') center/cover no-repeat; }
+        .box-five  { background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/short film.png') center/cover no-repeat; }
+        .box-six   { background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/capstone.jpg') center/cover no-repeat; }
+        .box-seven { background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/poster.png') center/cover no-repeat; }
+        .box-eight { background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/rizzq.png') center/cover no-repeat; }
+        .box-nine  { background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/dateta.png') center/cover no-repeat; }
+
+        /* CERTIFICATES */
+        .certificates { background: var(--bg2); }
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.1rem;
+        }
+        .cert-box {
+            height: 190px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--border);
+        }
+        .cert-box:hover { transform: translateY(-5px); box-shadow: 0 14px 32px rgba(0,0,0,0.12); }
+        .cert-box::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
+            z-index: 1;
+        }
+        .cert-inner {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 14px;
+            z-index: 2;
+        }
+        .cert-inner h3 {
+            color: #fff;
+            font-size: 0.75em;
+            font-weight: 500;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+        .cert-btn {
+            display: inline-block;
+            padding: 4px 13px;
+            background: var(--accent);
+            color: #fff;
+            border: 2px solid var(--accent);
+            border-radius: 3px;
+            font-size: 0.7em;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+        }
+        .cert-btn:hover { background: transparent; color: var(--accent-light); border-color: var(--accent-light); }
+
+        /* LIGHTBOX */
+        .overlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.78);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 9999; padding: 20px;
+            animation: fadeIn 0.2s ease;
+        }
+        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+        .overlay img, .overlay video {
+            max-width: 90vw; max-height: 85vh;
+            border-radius: 10px;
+            box-shadow: 0 24px 64px rgba(0,0,0,0.35);
+            animation: scaleIn 0.25s ease;
+        }
+        .overlay iframe {
+            width: 90vw; height: 85vh;
+            border: none; border-radius: 10px;
+            animation: scaleIn 0.25s ease;
+        }
+        @keyframes scaleIn { from { transform: scale(0.93); opacity:0; } to { transform: scale(1); opacity:1; } }
+        .overlay-close {
+            position: fixed;
+            top: 20px; right: 28px;
+            color: #fff;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 10000;
+            width: 40px; height: 40px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.4);
+            transition: background 0.2s;
+        }
+        .overlay-close:hover { background: var(--accent); }
+
+        /* CONTACT */
+        .contact { background: var(--bg); }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 80px;
+            align-items: start;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .contact-info .section-title { margin-bottom: 16px; }
+        .contact-info p { color: var(--muted); font-size: 0.95em; line-height: 1.85; margin-bottom: 12px; }
+        .contact-detail {
+            display: flex; align-items: center; gap: 10px;
+            color: var(--muted); font-size: 0.9em; margin-top: 10px;
+        }
+        .contact-detail i { color: var(--accent); font-size: 1.15em; }
+        .social-row { display: flex; gap: 12px; margin-top: 28px; }
+        .social-row a {
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            border: 1.5px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--muted);
+            font-size: 1.25em;
+            text-decoration: none;
+            transition: all 0.25s;
+            background: var(--bg2);
+        }
+        .social-row a:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); background: #fff; }
+        .contact-form {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 36px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: #fff;
+            color: var(--text);
+            border: 1.5px solid var(--border);
+            border-radius: 7px;
+            margin-bottom: 14px;
+            font-size: 0.9em;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.25s;
+        }
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder { color: #aaa; }
+        .contact-form input:focus,
+        .contact-form textarea:focus { border-color: var(--accent); outline: none; }
+        .contact-form textarea { resize: vertical; min-height: 120px; }
+        .submit-btn {
+            width: 100%;
+            padding: 13px;
+            background: var(--accent);
+            color: #fff;
+            border: 2px solid var(--accent);
+            border-radius: 7px;
+            font-size: 0.9em;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .submit-btn:hover { background: transparent; color: var(--accent); transform: translateY(-1px); }
+        .form-success {
+            text-align: center;
+            color: var(--accent);
+            font-size: 0.88em;
+            margin-top: 12px;
+            display: none;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 26px 80px;
+            border-top: 1px solid var(--border);
+            color: #aaa;
+            font-size: 0.8em;
+            background: var(--bg2);
+        }
+
+        /* REVEAL */
+        .reveal {
+            opacity: 0;
+            transform: translateY(26px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            header { padding: 18px 28px; }
+            section { padding: 70px 28px; }
+            .home { padding: 0 28px; }
+            .about-grid { grid-template-columns: 1fr; gap: 48px; }
+            .about-img-wrap { max-width: 280px; }
+            .certificates-grid { grid-template-columns: repeat(2, 1fr); }
+            .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            nav { display: none; }
+            .certificates-grid { grid-template-columns: repeat(2, 1fr); }
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">Ji.</div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#certificates">Certificates</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<section class="home" id="home">
+    <div class="home-content">
+        <div class="home-eyebrow">Information Systems · Portfolio</div>
+        <h1>Hi, I'm <em>Angeline<br>Ladroma</em></h1>
+        <p>Welcome to my portfolio! This portfolio showcases my academic projects, certifications, trainings, and achievements throughout my college journey.</p>
+        <div class="btn-group">
+            <a href="#projects" class="btn-primary">View My Work</a>
+            <a href="#contact" class="btn-ghost">Get in Touch</a>
+        </div>
+    </div>
+</section>
+
+<section class="about" id="about">
+    <div class="about-grid">
+        <div class="about-img-wrap reveal">
+            <img src="assets/images/pic.png" alt="Angeline Ladroma">
+        </div>
+        <div class="about-text reveal">
+            <h2 class="section-title"><br>About Me</h2>
+            <p>Hello! I'm Angeline Ladroma, a fourth-year Bachelor of Science in Information Systems student at Davao del Norte State College and a graduating student. I am passionate about technology, continuous learning, and creating practical solutions through web development. While design is not my strongest area, I enjoy challenging myself to improve and exploring the creative side of technology. I am eager to expand my skills, gain valuable industry experience, and contribute to projects that make a meaningful impact.</p>
+            <div class="about-stats">
+                <div>
+                    <div class="stat-num">9+</div>
+                    <div class="stat-label">Projects</div>
+                </div>
+                <div>
+                    <div class="stat-num">16+</div>
+                    <div class="stat-label">Certificates</div>
+                </div>
+                <div>
+                    <div class="stat-num">4th</div>
+                    <div class="stat-label">Year Student</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="projects" id="projects">
+    <div class="section-label">My Work</div>
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+
+        <div class="proj-box box-one reveal" onclick="openOverlay('projects/PersonalProfile.html','Personal Profile','iframe')">
+            <div class="proj-inner">
+                <div class="proj-tag">Web · HTML</div>
+                <h3>Personal Profile</h3>
+                <button class="proj-btn">View</button>
+            </div>
+        </div>
+
+        <div class="proj-box box-two reveal" onclick="openOverlay('projects/ImageMap.html','Image Map','iframe')">
+            <div class="proj-inner">
+                <div class="proj-tag">Web · HTML</div>
+                <h3>Image Map</h3>
+                <button class="proj-btn">View</button>
+            </div>
+        </div>
+
+        <div class="proj-box box-three reveal" onclick="openOverlay('assets/videos/pasundayag.mp4','Start-Up Sundayag 2024','video')">
+            <div class="proj-inner">
+                <div class="proj-tag">Video</div>
+                <h3>Start-Up Sundayag 2024<br>Promotional Video</h3>
+                <button class="proj-btn">View</button>
+            </div>
+        </div>
+
+        <div class="proj-box box-four reveal" onclick="openOverlay('assets/videos/exhibit.mp4','Capstone Exhibit 2026','video')">
+            <div class="proj-inner">
+                <div class="proj-tag">Video</div>
+                <h3>Capstone Exhibit 2026<br>Promotional Video</h3>
+                <button class="proj-btn">View</button>
+            </div>
+        </div>
+
+        <div class="proj-box box-five reveal" onclick="openOverlay('assets/videos/shortfilm.mp4','Short Film','video')">
+            <div class="proj-inner">
+                <div class="proj-tag">Video</div>
+                <h3>Short Film</h3>
+                <button class="proj-btn">View</button>
+            </div>
+        </div>
+
+        <div class="proj-box box-six reveal">
+            <div class="proj-inner">
+                <div class="proj-tag">Web App</div>
+                <h3>Capstone Project</h3>
+                <a href="https://sulogoon.online" target="_blank" class="proj-btn">View</a>
+            </div>
+        </div>
+
+        <div class="proj-box box-seven reveal" onclick="openOverlay('assets/images/poster.png','Capstone Exhibit Poster','image')">
+            <div class="proj-inner">
+                <div class="proj-tag">Design</div>
+                <h3>Capstone Exhibit Poster</h3>
+                <button class="proj-btn">View</button>
+            </div>
+        </div>
+
+        <div class="proj-box box-eight reveal">
+            <div class="proj-inner">
+                <div class="proj-tag">UI/UX · Figma</div>
+                <h3>RizzQ Prototype</h3>
+                <a href="https://www.figma.com/proto/2uUvOXfcqPwXM29bcex05d/RizzQ-Prototype?node-id=1-5" target="_blank" class="proj-btn">View</a>
+            </div>
+        </div>
+
+        <div class="proj-box box-nine reveal" onclick="openOverlay('assets/images/dateta.png','Data Analytics Workshop Group Poster','image')">
+            <div class="proj-inner">
+                <div class="proj-tag">Research</div>
+                <h3>Data Analytics Workshop<br>Group Poster</h3>
+                <button class="proj-btn">View</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="certificates" id="certificates">
+    <div class="section-label">Credentials</div>
+    <h2 class="section-title">Certificates</h2>
+    <div class="certificates-grid">
+
+        <div class="cert-box reveal" style="background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/BF_OVERALL.jpg') center/cover no-repeat;" onclick="openOverlay('assets/images/BF_OVERALL.jpg','BYTE FEST 2023 Overall','image')">
+            <div class="cert-inner"><h3>BYTE FEST 2023</h3><button class="cert-btn">View</button></div>
+        </div>
+
+        <div class="cert-box reveal" style="background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/BF_SALUDO.jpg') center/cover no-repeat;" onclick="openOverlay('assets/images/BF_SALUDO.jpg','BYTE FEST 2023 Saludo','image')">
+            <div class="cert-inner"><h3>BYTE FEST 2023</h3><button class="cert-btn">View</button></div>
+        </div>
+
+        <div class="cert-box reveal" style="background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/technogroove.jpg') center/cover no-repeat;" onclick="openOverlay('assets/images/technogroove.jpg','Technogroove','image')">
+            <div class="cert-inner"><h3>Technogroove</h3><button class="cert-btn">View</button></div>
+        </div>
+
+        <div class="cert-box reveal" style="background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/webinar1.png') center/cover no-repeat;" onclick="openOverlay('assets/images/webinar1.png','Webinar on Mental Health Awareness','image')">
+            <div class="cert-inner"><h3>Webinar on Mental Health Awareness</h3><button class="cert-btn">View</button></div>
+        </div>
+
+        <div class="cert-box reveal" style="background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/webinar2.png') center/cover no-repeat;" onclick="openOverlay('assets/images/webinar2.png','Webinar on Suicide Prevention','image')">
+            <div class="cert-inner"><h3>Webinar on Suicide Prevention</h3><button class="cert-btn">View</button></div>
+        </div>
+
+        <div class="cert-box reveal" style="background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/WAVETECH.jpg') center/cover no-repeat;" onclick="openOverlay('assets/images/WAVETECH.jpg','Start-Up Sundayag 2024','image')">
+            <div class="cert-inner"><h3>Start-Up Sundayag 2024</h3><button class="cert-btn">View</button></div>
+        </div>
+
+        <div class="cert-box reveal" style="background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/activity.png') center/cover no-repeat;" onclick="openOverlay('assets/images/activity.png','Mental Health Awareness Activity','image')">
+            <div class="cert-inner"><h3>Mental Health Awareness Activity</h3><button class="cert-btn">View</button></div>
+        </div>
+
+        <div class="cert-box reveal" style="background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/python1.jpg') center/cover no-repeat;" onclick="openOverlay('assets/images/python1.jpg','Python Essentials 1','image')">
+            <div class="cert-inner"><h3>Python Essentials 1</h3><button class="cert-btn">View</button></div>
+        </div>
+
+        <div class="cert-box reveal" style="background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/python2.jpg') center/cover no-repeat;" onclick="openOverlay('assets/images/python2.jpg','Python Essentials 2','image')">
+            <div class="cert-inner"><h3>Python Essentials 2</h3><button class="cert-btn">View</button></div>
+        </div>
+
+        <div class="cert-box reveal" style="background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/top1.jpg') center/cover no-repeat;" onclick="openOverlay('assets/images/top1.jpg','TESDA Online Program','image')">
+            <div class="cert-inner"><h3>TESDA Online Program</h3><button class="cert-btn">View</button></div>
+        </div>
+
+        <div class="cert-box reveal" style="background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/top2.jpg') center/cover no-repeat;" onclick="openOverlay('assets/images/top2.jpg','TESDA Online Program','image')">
+            <div class="cert-inner"><h3>TESDA Online Program</h3><button class="cert-btn">View</button></div>
+        </div>
+
+        <div class="cert-box reveal" style="background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/tree.png') center/cover no-repeat;" onclick="openOverlay('assets/images/tree.png','GCash Tree Planting','image')">
+            <div class="cert-inner"><h3>GCash Tree Planting</h3><button class="cert-btn">View</button></div>
+        </div>
+
+        <div class="cert-box reveal" style="background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/deployment.jpg') center/cover no-repeat;" onclick="openOverlay('assets/images/deployment.jpg','Capstone Project Deployment','image')">
+            <div class="cert-inner"><h3>Capstone Project Deployment</h3><button class="cert-btn">View</button></div>
+        </div>
+
+        <div class="cert-box reveal" style="background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/ojt.jpg') center/cover no-repeat;" onclick="openOverlay('assets/images/ojt.jpg','On-The-Job Training','image')">
+            <div class="cert-inner"><h3>On-The-Job Training</h3><button class="cert-btn">View</button></div>
+        </div>
+
+        <div class="cert-box reveal" style="background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/exhibitcert.jpg') center/cover no-repeat;" onclick="openOverlay('assets/images/exhibitcert.jpg','Capstone Exhibit 2026','image')">
+            <div class="cert-inner"><h3>Capstone Exhibit 2026</h3><button class="cert-btn">View</button></div>
+        </div>
+
+        <div class="cert-box reveal" style="background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('assets/images/binhicert.jpg') center/cover no-repeat;" onclick="openOverlay('assets/images/binhicert.jpg','BINHI 2026','image')">
+            <div class="cert-inner"><h3>BINHI 2026</h3><button class="cert-btn">View</button></div>
+        </div>
+
+    </div>
+</section>
+
+<section class="contact" id="contact">
+    <div class="contact-grid">
+        <div class="contact-info reveal">
+            <div class="section-label">Say Hello</div>
+            <h2 class="section-title">Let's connect.</h2>
+            <p>Have questions, suggestions, or business inquiries? Feel free to reach out — I'll get back to you as soon as possible.</p>
+            <div class="contact-detail">
+                <i class='bx bx-map'></i>
+                Salvacion, Panabo City, Davao del Norte, Philippines
+            </div>
+            <div class="social-row">
+                <a href="https://www.facebook.com/angeline.ladroma.3" target="_blank"><i class='bx bxl-facebook'></i></a>
+                <a href="https://www.instagram.com/angie_ldrm/" target="_blank"><i class='bx bxl-instagram'></i></a>
+                <a href="https://x.com/Jiiixyz03" target="_blank"><i class='bx bxl-twitter'></i></a>
+            </div>
+        </div>
+        <div class="reveal">
+            <form class="contact-form">
+                <div class="form-row">
+                    <input type="text" placeholder="Your name" required>
+                    <input type="email" placeholder="Email address" required>
+                </div>
+                <input type="text" placeholder="Phone number (optional)">
+                <textarea placeholder="Your message..."></textarea>
+                <button type="submit" class="submit-btn">Send Message</button>
+                <div class="form-success">✓ Message sent successfully!</div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Angeline Ladroma · Designed with care</p>
+</footer>
+
+<script>
+function openOverlay(src, title, type) {
+    const ov = document.createElement('div');
+    ov.className = 'overlay';
+    let content = '';
+    if (type === 'video') {
+        content = `<video src="${src}" controls autoplay></video>`;
+    } else if (type === 'iframe') {
+        content = `<iframe src="${src}" title="${title}"></iframe>`;
+    } else {
+        content = `<img src="${src}" alt="${title}">`;
+    }
+    ov.innerHTML = `<span class="overlay-close" onclick="this.parentElement.remove()">×</span>${content}`;
+    ov.addEventListener('click', e => { if (e.target === ov) ov.remove(); });
+    document.addEventListener('keydown', function esc(e) {
+        if (e.key === 'Escape') { ov.remove(); document.removeEventListener('keydown', esc); }
+    });
+    document.body.appendChild(ov);
+}
+
+document.querySelector('.contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const msg = this.querySelector('.form-success');
+    msg.style.display = 'block';
+    this.reset();
+    setTimeout(() => { msg.style.display = 'none'; }, 3000);
+});
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('nav a');
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.getAttribute('id'); });
+    navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
+});
+</script>
+</body>
+</html>
